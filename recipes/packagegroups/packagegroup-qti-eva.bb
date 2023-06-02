@@ -1,7 +1,7 @@
 SUMMARY = "QTI EVA Package Group"
 
 LICENSE = "BSD-3-Clause-Clear"
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PACKAGE_ARCH ?= "${MACHINE_ARCH}"
 inherit packagegroup
 
 PROVIDES = "${PACKAGES}"
@@ -9,7 +9,7 @@ PROVIDES = "${PACKAGES}"
 PACKAGES = "\
     packagegroup-qti-eva \
     "
-RDEPENDS_packagegroup-qti-eva += " \
+RDEPENDS:packagegroup-qti-eva += " \
     eva-kernel \
     "
 
