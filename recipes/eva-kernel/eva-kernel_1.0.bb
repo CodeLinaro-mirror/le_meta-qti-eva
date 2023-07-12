@@ -14,7 +14,7 @@ SRC_URI = "file://vendor/qcom/opensource/eva-kernel/ \
 file://${BASEMACHINE}/eva_load.conf"
 SRC_URI +=  "file://kernel-5.10/kernel_platform"
 SRC_URI +=  "file://kernel-5.10/out/${KERNEL_DEFCONFIG}"
-
+SRC_URI += "file://vendor/qcom/opensource/eva-kernel/eva.rules"
 
 S = "${WORKDIR}/vendor/qcom/opensource/eva-kernel/"
 KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
@@ -48,6 +48,7 @@ do_install() {
     install -m 0755 ${WORKDIR}/${BASEMACHINE}/eva_load.conf -D ${D}${sysconfdir}/modules-load.d/eva_load.conf
     install -m 0755 ${WORKDIR}/vendor/qcom/opensource/eva-kernel/msm/msm-eva.ko -D ${D}${base_libdir}/modules/${KERNEL_VERSION}/msm-eva.ko
     install -m 0755 ${WORKDIR}/vendor/qcom/opensource/eva-kernel/Module.symvers  -D ${D}${base_libdir}/modules/${KERNEL_VERSION}/Module.symver
+    install -m 0644 ${S}/eva.rules -D ${D}${sysconfdir}/udev/rules.d/eva.rules
 }
 
 do_deploy() {
