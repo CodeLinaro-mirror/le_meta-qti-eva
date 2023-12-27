@@ -61,7 +61,8 @@ do_deploy() {
 
 addtask deploy after do_install before do_package
 
-#FILES_${PN} += "${base_libdir}/modules/*"
-FILES_${PN} += "${base_libdir}/modules/*/*.ko"
-FILES_${PN}-dev += "/usr/include/*"
+INSANE_SKIP:${PN} += "installed-vs-shipped"
+#FILES:${PN} += "${base_libdir}/modules/*"
+FILES:${PN} += "${base_libdir}/modules/*/*.ko"
+FILES:${PN}-dev += "/usr/include/*"
 do_rm_work[noexec] = "1"

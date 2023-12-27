@@ -9,7 +9,7 @@ PROVIDES = "${PACKAGES}"
 PACKAGES = "\
     packagegroup-qti-eva \
     "
-RDEPENDS_packagegroup-qti-eva += " \
+RDEPENDS:packagegroup-qti-eva += " \
     eva-kernel \
     "
 
