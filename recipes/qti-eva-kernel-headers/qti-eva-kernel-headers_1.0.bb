@@ -12,4 +12,4 @@ SRC_URI   = "file://vendor/qcom/opensource/eva-kernel/include/uapi/eva/media"
 
 S = "${WORKDIR}//vendor/qcom/opensource/eva-kernel/include/uapi/eva/media"
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
