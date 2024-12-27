@@ -37,9 +37,9 @@ do_compile() {
                  MODULE_SYNX=y \
                  MODULE_IPCLITE=y \
                  ./build/build_module.sh \
-                 LE_TEST+=-I${WORKDIR}/recipe-sysroot/usr/include \
-                 LE_TEST+=-I${WORKDIR}/recipe-sysroot/usr/include/linux \
-                 LE_TEST+=-I${S}/msm/eva \
+                 KERNEL_HEADER+=-I${WORKDIR}/recipe-sysroot/usr/include \
+                 KERNEL_HEADER+=-I${WORKDIR}/recipe-sysroot/usr/include/linux \
+                 KERNEL_HEADER+=-I${S}/msm/eva \
                  KBUILD_EXTRA_SYMBOLS=${WORKDIR}/recipe-sysroot/lib/modules/${KERNEL_VERSION}/fastrpc-kernel/Module.symvers \
                  KBUILD_EXTRA_SYMBOLS+=${WORKDIR}/recipe-sysroot/lib/modules/${KERNEL_VERSION}/synx-kernel/Module.symvers \
                  KBUILD_EXTRA_SYMBOLS+=${STAGING_DIR_HOST}/lib/modules/${KERNEL_VERSION}/mmrm-kernel/Module.symvers
