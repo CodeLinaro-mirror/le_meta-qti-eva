@@ -30,7 +30,8 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-export MODULE_BASE=/usr/lib/modules/
+export KERNEL_VER=$(uname -r)
+export MODULE_BASE=/lib/modules/$KERNEL_VER/
 set -e
 
 case "$1" in
