@@ -1,8 +1,9 @@
 inherit linux-kernel-base deploy
 
 DESCRIPTION = "QTI EVA driver"
-LICENSE = "GPL-2.0 WITH Linux-syscall-note"
-LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-6.1/kernel_platform/msm-kernel/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
+LICENSE = "GPLv2.0-with-linux-syscall-note"
+LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-6.6/kernel_platform/msm-kernel/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
+
 PR = "r0"
 
 DEPENDS = "bc-native rsync-native mmrm-kernel"
