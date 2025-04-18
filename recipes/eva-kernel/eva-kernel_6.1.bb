@@ -58,7 +58,7 @@ do_install() {
 
     install -d ${D}/usr/lib/modules/
     install -m 0755 ${WORKDIR}/vendor/qcom/opensource/eva-kernel/msm/msm-eva.ko -D ${D}${base_libdir}/modules/${KERNEL_VERSION}/msm-eva.ko
-    install -m 0755 ${WORKDIR}/vendor/qcom/opensource/eva-kernel/Module.symvers -D ${D}${base_libdir}/modules/${KERNEL_VERSION}/Module.symvers
+    install -m 0755 ${WORKDIR}/vendor/qcom/opensource/eva-kernel/Module.symvers -D ${D}${includedir}/kernel-module-msm-eva/Module.symvers
     install -m 0644 ${S}/eva.rules -D ${D}${sysconfdir}/udev/rules.d/eva.rules
 }
 
