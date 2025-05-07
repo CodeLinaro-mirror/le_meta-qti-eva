@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-6.1/kernel_platform/msm-kernel/CO
 PR = "r0"
 
 DEPENDS = "bc-native rsync-native mmrm-kernel"
-DEPENDS += "synx-kernel synx-kernel-header fastrpc-kernel"
+DEPENDS += "synx-kernel synx-kernel-header fastrpc-kernel-le"
 
 do_compile[depends] += "virtual/kernel:do_shared_workdir"
 do_compile[cleandirs] += "${WORKDIR}/out/${KERNEL_DEFCONFIG}"
@@ -40,9 +40,9 @@ do_compile() {
                  KERNEL_HEADER+=-I${WORKDIR}/recipe-sysroot/usr/include \
                  KERNEL_HEADER+=-I${WORKDIR}/recipe-sysroot/usr/include/linux \
                  KERNEL_HEADER+=-I${S}/msm/eva \
-                 KBUILD_EXTRA_SYMBOLS=${WORKDIR}/recipe-sysroot/lib/modules/${KERNEL_VERSION}/fastrpc-kernel/Module.symvers \
-                 KBUILD_EXTRA_SYMBOLS+=${WORKDIR}/recipe-sysroot/lib/modules/${KERNEL_VERSION}/synx-kernel/Module.symvers \
-                 KBUILD_EXTRA_SYMBOLS+=${STAGING_DIR_HOST}/lib/modules/${KERNEL_VERSION}/mmrm-kernel/Module.symvers
+                 KBUILD_EXTRA_SYMBOLS=${WORKDIR}/recipe-sysroot/usr/lib/modules/${KERNEL_VERSION}/fastrpc-kernel/Module.symvers \
+                 KBUILD_EXTRA_SYMBOLS+=${WORKDIR}/recipe-sysroot/usr/lib/modules/${KERNEL_VERSION}/synx-kernel/Module.symvers \
+                 KBUILD_EXTRA_SYMBOLS+=${STAGING_DIR_HOST}/usr/lib/modules/${KERNEL_VERSION}/mmrm-kernel/Module.symvers
 }
 
 

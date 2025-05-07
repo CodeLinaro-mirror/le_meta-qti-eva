@@ -1,0 +1,20 @@
+# Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
+
+#!/bin/bash
+
+[Unit]
+Description= Load eva dlkm service
+SourcePath=/etc/initscripts/start_eva_le
+
+[Service]
+Restart=on-failure
+RemainAfterExit=yes
+# This service file has no binary and it is to execute the list of commands in <script>.
+# Use Script file only when there is NO binary or commands to be executed/ modules to be installed cases.
+# ExecStart=/bin/bash /etc/initscripts/start_eva_le start
+ExecStart=/bin/bash -c "/etc/initscripts/start_eva_le start && test -f /sys/devices/virtual/cvp/cvp/boot && echo 1 > /sys/devices/virtual/cvp/cvp/boot"
+ExecStop=/bin/bash /etc/initscripts/start_eva_le stop
+
+[Install]
+WantedBy=multi-user.target
