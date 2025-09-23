@@ -2,13 +2,18 @@ inherit linux-kernel-base deploy
 
 DESCRIPTION = "QTI EVA driver"
 LICENSE = "GPLv2.0-with-linux-syscall-note"
-LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-6.6/kernel_platform/msm-kernel/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
+LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-6.12/kernel_platform/soc-repo/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 PR = "r0"
 
-DEPENDS = "bc-native rsync-native mmrm-kernel"
-DEPENDS += "synx-kernel synx-kernel-header fastrpc-kernel-le"
+#DEPENDS = "bc-native rsync-native mmrm-kernel"
+#DEPENDS += "synx-kernel synx-kernel-header fastrpc-kernel"
 
+#####Add for DDK
+DDK_BUILD ?= "false"
+DEPENDS += "${@bb.utils.contains('DDK_BUILD', 'false', \
+    'bc-native rsync-native mmrm-kernel synx-kernel synx-kernel-header fastrpc-kernel-le', '', d)}"
+OVERRIDES:append = "${@':ddk_build' if d.getVar('DDK_BUILD') == 'true' else ''}"
 do_compile[depends] += "virtual/kernel:do_shared_workdir"
 do_compile[cleandirs] += "${WORKDIR}/out/${KERNEL_DEFCONFIG}"
 
@@ -34,6 +39,29 @@ do_compile() {
                  KERNEL_KIT=${KERNEL_PREBUILT_PATH} \
                  OUT_DIR=${WORKDIR}/out/${KERNEL_DEFCONFIG} \
                  MODULE_OUT=${S} \
+                 ENABLE_DDK_BUILD=${DDK_BUILD} \
+                 TARGET_BOARD_PLATFORM=${TARGET_BOARD_PLATFORM} \
+                 INPLACE_COMPILE=y \
+                 MODULE_SYNX=y \
+                 MODULE_IPCLITE=y \
+                 ./build/build_module.sh \
+                 KERNEL_HEADER+=-I${WORKDIR}/recipe-sysroot/usr/include \
+                 KERNEL_HEADER+=-I${WORKDIR}/recipe-sysroot/usr/include/linux \
+                 KERNEL_HEADER+=-I${S}/msm/eva \
+                 KBUILD_EXTRA_SYMBOLS=${WORKDIR}/recipe-sysroot/usr/lib/modules/${KERNEL_VERSION}/fastrpc-kernel/Module.symvers \
+                 KBUILD_EXTRA_SYMBOLS+=${WORKDIR}/recipe-sysroot/usr/lib/modules/${KERNEL_VERSION}/synx-kernel/Module.symvers \
+                 KBUILD_EXTRA_SYMBOLS+=${STAGING_DIR_HOST}/usr/lib/modules/${KERNEL_VERSION}/mmrm-kernel/Module.symvers
+}
+#####Add for DDK
+do_compile:ddk_build() {
+    cd ${KERNEL_PLATFORM_PATH}
+    BUILD_CONFIG=${KERNEL_BUILD_CONFIG} \
+                 EXT_MODULES=${EXT_MODULES} \
+                 KERNEL_KIT=${KERNEL_PREBUILT_PATH} \
+                 OUT_DIR=${WORKDIR}/out/${KERNEL_DEFCONFIG} \
+                 MODULE_OUT=${S} \
+                 ENABLE_DDK_BUILD=${DDK_BUILD} \
+                 TARGET_BOARD_PLATFORM=${TARGET_BOARD_PLATFORM} \
                  INPLACE_COMPILE=y \
                  MODULE_SYNX=y \
                  MODULE_IPCLITE=y \
@@ -57,7 +85,7 @@ do_install() {
 
     install -d ${D}${base_libdir}/modules/
     install -m 0644 ${WORKDIR}/${BASEMACHINE}/eva_load.conf -D ${D}${sysconfdir}/modules-load.d/eva_load.conf
-    install -m 0644 ${S}/msm/msm-eva.ko -D ${D}${libdir}/modules/msm-eva.ko
+    install -m 0644 ${S}/msm-eva.ko -D ${D}${libdir}/modules/msm-eva.ko
     install -m 0755 ${S}/Module.symvers  -D ${D}${base_libdir}/modules/${KERNEL_VERSION}/eva-kernel/Module.symver
     install -m 0644 ${S}/cvp.rules -D ${D}${sysconfdir}/udev/rules.d/cvp.rules
 }

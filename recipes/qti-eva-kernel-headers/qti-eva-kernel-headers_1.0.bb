@@ -3,7 +3,7 @@ HOMEPAGE         = "https://source.codeaurora.org/"
 DESCRIPTION = "Generates qti_eva_kernel headers"
 
 LICENSE          = "GPLv2.0-with-linux-syscall-note"
-LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-6.6/kernel_platform/msm-kernel/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
+LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-6.12/kernel_platform/soc-repo/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 PACKAGE_ARCH    ?= "${MACHINE_ARCH}"
 
