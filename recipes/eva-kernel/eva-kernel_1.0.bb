@@ -18,7 +18,7 @@ file://${BASEMACHINE}/eva_load.conf"
 SRC_URI += "file://vendor/qcom/opensource/eva-kernel/cvp.rules"
 SRC_URI += "file://${BASEMACHINE}/start_eva_le"
 SRC_URI += "file://${BASEMACHINE}/eva.service"
-S = "${WORKDIR}/vendor/qcom/opensource/eva-kernel/"
+S = "${WORKDIR}/vendor/qcom/opensource/eva-kernel"
 
 KERNEL_VERSION = "${@get_kernelversion_file("${STAGING_KERNEL_BUILDDIR}")}"
 EXT_MODULES = "${@os.path.relpath("${S}","${KERNEL_PLATFORM_PATH}")}"
