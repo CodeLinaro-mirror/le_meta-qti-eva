@@ -61,6 +61,7 @@ do_compile:ddk_build() {
                  OUT_DIR=${WORKDIR}/out/${KERNEL_DEFCONFIG} \
                  MODULE_OUT=${S} \
                  ENABLE_DDK_BUILD=${DDK_BUILD} \
+                 VARIANT=${KERNEL_DEFCONFIG_VARIANT} \
                  TARGET_BOARD_PLATFORM=${TARGET_BOARD_PLATFORM} \
                  INPLACE_COMPILE=y \
                  MODULE_SYNX=y \
