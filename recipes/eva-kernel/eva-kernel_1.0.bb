@@ -16,6 +16,7 @@ DEPENDS += "${@bb.utils.contains('DDK_BUILD', 'false', \
 OVERRIDES:append = "${@':ddk_build' if d.getVar('DDK_BUILD') == 'true' else ''}"
 do_compile[depends] += "virtual/kernel:do_shared_workdir"
 do_compile[cleandirs] += "${WORKDIR}/out/${KERNEL_DEFCONFIG}"
+do_compile[network] = "1"
 
 FILESPATH =+ "${WORKSPACE}:"
 SRC_URI = "file://vendor/qcom/opensource/eva-kernel/ \
