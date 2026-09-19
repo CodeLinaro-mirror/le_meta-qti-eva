@@ -19,7 +19,7 @@ file://${BASEMACHINE}/eva_params.conf"
 SRC_URI += "file://vendor/qcom/opensource/eva-kernel/cvp.rules"
 
 
-S = "${WORKDIR}/vendor/qcom/opensource/eva-kernel/"
+S = "${UNPACKDIR}/vendor/qcom/opensource/eva-kernel/"
 EXT_MODULES = "${@os.path.relpath("${S}","${KERNEL_PLATFORM_PATH}")}"
 KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 EXTRA_OEMAKE += "TARGET_SUPPORT=${BASEMACHINE}"

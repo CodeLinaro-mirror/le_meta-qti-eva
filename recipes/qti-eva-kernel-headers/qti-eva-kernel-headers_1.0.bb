@@ -10,6 +10,6 @@ PACKAGE_ARCH    ?= "${MACHINE_ARCH}"
 FILESPATH = "${WORKSPACE}/:"
 SRC_URI   = "file://vendor/qcom/opensource/eva-kernel/include/uapi/eva/media"
 
-S = "${WORKDIR}//vendor/qcom/opensource/eva-kernel/include/uapi/eva/media"
+S = "${UNPACKDIR}//vendor/qcom/opensource/eva-kernel/include/uapi/eva/media"
 
 ALLOW_EMPTY:${PN} = "1"
