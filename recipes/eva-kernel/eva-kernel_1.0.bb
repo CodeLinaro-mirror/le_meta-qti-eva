@@ -1,8 +1,8 @@
 inherit linux-kernel-base deploy
 
 DESCRIPTION = "QTI EVA driver"
-LICENSE = "GPL-2.0 WITH Linux-syscall-note"
-LIC_FILES_CHKSUM = "file://${WORKSPACE}/kernel-5.15/kernel_platform/msm-kernel/COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
+LICENSE = "GPLv2.0-with-linux-syscall-note"
+LIC_FILES_CHKSUM = "file://${QTI_METADATA_ROOT}/meta-qti-bsp/files/common-licenses/${LICENSE};md5=8afb6abdac9a14cb18a0d6c9c151e9b4"
 PR = "r0"
 
 #DEPENDS = "bc-native rsync-native mmrm-kernel"
@@ -19,7 +19,7 @@ file://${BASEMACHINE}/eva_params.conf"
 SRC_URI += "file://vendor/qcom/opensource/eva-kernel/cvp.rules"
 
 
-S = "${UNPACKDIR}/vendor/qcom/opensource/eva-kernel/"
+S = "${UNPACKDIR}/vendor/qcom/opensource/eva-kernel"
 EXT_MODULES = "${@os.path.relpath("${S}","${KERNEL_PLATFORM_PATH}")}"
 KERNEL_VERSION = "${@oe.utils.read_file('${STAGING_KERNEL_BUILDDIR}/kernel-abiversion')}"
 EXTRA_OEMAKE += "TARGET_SUPPORT=${BASEMACHINE}"
